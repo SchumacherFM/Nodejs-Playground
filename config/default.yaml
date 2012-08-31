@@ -1,0 +1,4 @@
+app:
+  port: 3000
+  pub_dir: "/public"
+  cookie_secret: "asDHWGDGSJasjdh216834"

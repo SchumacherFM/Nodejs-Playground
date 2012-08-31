@@ -1,0 +1,16 @@
+Hi, {{name}}!
+<hr>
+<a href="/test?name=MyNameIsNobody">Test page</a>
+<hr>
+Result:
+
+<table>
+    <tr>
+        <th>UID</th>
+        <th>Name</th>
+    </tr>
+  {{#myHandlebar rows}}
+    <tr><td>{{uid}}</td><td>{{name}}</td></tr>
+{{/myHandlebar}}
+
+</table>

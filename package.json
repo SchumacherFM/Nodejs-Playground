@@ -1,0 +1,23 @@
+{
+  "name" : "Kiris NodeJsBootstrap"
+  ,"version" : "0.0.1"
+  ,"description" : "Node/Express.js Template with Twitter Bootstrap2 and other goodies"
+  ,"author" : "Cyrill Schumacher"
+  ,"main" : "./server.js"
+  ,"repository": {
+      "type": "git",
+      "url": "https://github.com/inadarei/nodebootstrap"
+  }
+  ,"engines": {
+      "node": ">=0.6.0"
+  }
+  ,"dependencies": {
+    "yaml"                : ""
+    ,"express"            : "3.x"
+    ,"config"             : ""
+    ,"hbs"                : "1.x"
+    ,"less"               : "1.x"
+    ,"less-middleware"    : ""
+    ,"underscore"         : "1.x"
+  }
+}
