@@ -1,11 +1,13 @@
 ## @SchumacherFM Node.js Playground
 
 * implemented mysql
+* custom mysql query with result output (missing best practice)
 * custom handlebars.js helper
 
 ## Node Bootstrap skeleton
 
-Node Bootstrap is a project skeleton for [Node.js](http://nodejs.org/) 0.6.x+ and [Express.js](http://expressjs.com)
+Node Bootstrap (https://github.com/inadarei/nodebootstrap) is a project skeleton for
+[Node.js](http://nodejs.org/) 0.6.x+ and [Express.js](http://expressjs.com)
 development with Twitter's [Bootstrap](http://twitter.github.com/bootstrap/) (no pun intended) framework.
 
 Project skeleton provides: common node.js webapp layout for responsive web development, suggests some common Node
