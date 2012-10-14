@@ -1,23 +1,26 @@
 {
-  "name" : "Kiris NodeJsBootstrap"
+  "name" : "Nodejs-Playground"
   ,"version" : "0.0.1"
   ,"description" : "Node/Express.js Template with Twitter Bootstrap2 and other goodies"
   ,"author" : "Cyrill Schumacher"
   ,"main" : "./server.js"
+  ,"private":"true"
   ,"repository": {
       "type": "git",
-      "url": "https://github.com/inadarei/nodebootstrap"
+      "url": "https://github.com/SchumacherFM/Nodejs-Playground"
   }
   ,"engines": {
       "node": ">=0.6.0"
   }
   ,"dependencies": {
     "yaml"                : ""
-    ,"express"            : "3.x"
+    ,"express"            : ""
     ,"config"             : ""
     ,"hbs"                : "1.x"
     ,"less"               : "1.x"
     ,"less-middleware"    : ""
     ,"underscore"         : "1.x"
+    , "riak"          : ""
+    , "mysql"           : ""
   }
 }
