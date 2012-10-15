@@ -14,13 +14,13 @@
   }
   ,"dependencies": {
     "yaml"                : ""
-    ,"express"            : ""
+    ,"express"            : "latest"
     ,"config"             : ""
     ,"hbs"                : "1.x"
     ,"less"               : "1.x"
     ,"less-middleware"    : ""
-    ,"underscore"         : "1.x"
-    , "riak"          : ""
-    , "mysql"           : ""
+    ,"underscore"         : "latest"
+    , "riak-js"          : "latest"
+    , "mysql"           : "latest"
   }
 }

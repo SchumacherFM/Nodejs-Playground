@@ -1,0 +1,16 @@
+<a href="/riakGet">riak get</a><br/>
+<a href="/riakGetAll">riak get all</a><br/>
+<a href="/riakMapReduce">riak map reduce</a><br/>
+
+Riak Data Test:
+<hr>
+{{{riakRes}}}
+<hr>
+
+<ul class="people_list">
+  {{#each riakAll}}
+  <li>{{meta.bucket}} {{meta.key}}<br/>
+    Open: {{data.Open}}
+  </li>
+  {{/each}}
+</ul>
