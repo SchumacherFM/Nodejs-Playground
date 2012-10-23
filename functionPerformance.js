@@ -5,7 +5,15 @@
  * function performance demo
  */
 
-/*******************************************************/
+/****
+* Result:
+         Loop1 / Time: 0 sec 237 ms
+         Loop2 / Time: 0 sec 129 ms
+         Loop3 / Time: 0 sec 516 ms
+         Loop4 / Time: 0 sec 362 ms
+*/
+
+ /*******************************************************/
 var timer = function () {
     this._start = 0;
 };
@@ -15,15 +23,16 @@ timer.prototype.reset = function () {
 }
 
 timer.prototype.getMilliDiff = function () {
-    this._end = process.hrtime(this._start);
-    return (this._end - this._start );
+    return process.hrtime(this._start);
 };
 
 timer.prototype.timeOver = function (text) {
-    console.log(text + ' / Time: ' + this.getMilliDiff() + 'ms');
+    var diff = this.getMilliDiff();
+    console.log(text + ' / Time: ' + diff[0] + ' sec ' + Math.round(diff[1] / 1000000) + ' ms');
 };
 
 /*******************************************************/
+// using parseInt just for fun
 var calculations = function (calc) {
     calc = parseInt(calc);
     return Math.sqrt(calc);
@@ -36,7 +45,8 @@ var aFunc = function (c) {
     count1 = 0,
     count2 = 0,
     count3 = 0,
-    iterations = 5000000;
+    count4 = 0,
+    iterations = 7000000;
 
 /*******************************************************/
 var theTimer = new timer();
@@ -47,13 +57,9 @@ for (var i = 0; i < iterations; ++i) {
 }
 theTimer.timeOver('Loop1');
 
-
 theTimer.reset();
 for (var i = 0; i < iterations; ++i) {
-    (function (c) {
-        count2 += parseInt(c);
-        count2 = Math.sqrt(count2);
-    })(i);
+    count2 += calculations(i);
 }
 theTimer.timeOver('Loop2');
 
@@ -61,8 +67,17 @@ theTimer.timeOver('Loop2');
 theTimer.reset();
 for (var i = 0; i < iterations; ++i) {
     (function (c) {
-        count3 += calculations(i);
+        count3 += parseInt(c);
+        count3 = Math.sqrt(count3);
     })(i);
 }
 theTimer.timeOver('Loop3');
 
+
+theTimer.reset();
+for (var i = 0; i < iterations; ++i) {
+    (function (c) {
+        count4 += calculations(i);
+    })(i);
+}
+theTimer.timeOver('Loop4');
