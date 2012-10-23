@@ -15,13 +15,13 @@ timer.prototype.reset = function () {
     this._start = new Date().getUTCMilliseconds();
 }
 
-timer.prototype.getTime = function () {
+timer.prototype.getMilliDiff = function () {
     this._end = new Date().getUTCMilliseconds();
     return (this._end - this._start );
 };
 
 timer.prototype.timeOver = function (text) {
-    console.log(text + ' / Time: ' + this.getTime() + 'ms');
+    console.log(text + ' / Time: ' + this.getMilliDiff() + 'ms');
 };
 
 /*******************************************************/
