@@ -4,7 +4,6 @@
  * @date 10/23/12
  * function performance demo
  */
-var fs = require('fs');
 
 /*******************************************************/
 var timer = function () {
@@ -12,11 +11,11 @@ var timer = function () {
 };
 
 timer.prototype.reset = function () {
-    this._start = new Date().getUTCMilliseconds();
+    this._start = process.hrtime();
 }
 
 timer.prototype.getMilliDiff = function () {
-    this._end = new Date().getUTCMilliseconds();
+    this._end = process.hrtime(this._start);
     return (this._end - this._start );
 };
 
@@ -47,6 +46,7 @@ for (var i = 0; i < iterations; ++i) {
     aFunc(i);
 }
 theTimer.timeOver('Loop1');
+
 
 theTimer.reset();
 for (var i = 0; i < iterations; ++i) {

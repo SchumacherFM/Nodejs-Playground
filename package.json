@@ -22,5 +22,6 @@
     ,"underscore"         : "latest"
     , "riak-js"          : "latest"
     , "mysql"           : "latest"
+    , "microtime" : "latest"
   }
 }
