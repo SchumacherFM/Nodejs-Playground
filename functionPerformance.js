@@ -6,14 +6,15 @@
  */
 
 /****
-* Result:
-         Loop1 / Time: 0 sec 237 ms
-         Loop2 / Time: 0 sec 129 ms
-         Loop3 / Time: 0 sec 516 ms
-         Loop4 / Time: 0 sec 362 ms
-*/
+ * Result:
+ Loop1 / Time: x sec 276ms T2
+ Loop2 / Time: 0 sec 219 ms
+ Loop3 / Time: 0 sec 553 ms
+ Loop4 / Time: 0 sec 374 ms
+ Loop5 / Time: 0 sec 221 ms
+ */
 
- /*******************************************************/
+/*******************************************************/
 var timer = function () {
     this._start = 0;
 };
@@ -43,7 +44,7 @@ var timer2 = (function () {
 
     var _getMilliDiff = function () {
         var _diff = process.hrtime(_start);
-        return Math.round( _diff[1] / 1000000 );
+        return Math.round(_diff[1] / 1000000);
     };
     var timeOver = function (text) {
         console.log(text + ' / Time: x sec ' + _getMilliDiff() + 'ms T2');
@@ -63,13 +64,10 @@ var calculations = function (calc) {
 }
 
 var aFunc = function (c) {
-        count1 += parseInt(c);
-        count1 = Math.sqrt(count1);
+        count += parseInt(c);
+        count = Math.sqrt(count);
     },
-    count1 = 0,
-    count2 = 0,
-    count3 = 0,
-    count4 = 0,
+    count = 0,
     iterations = 7000000;
 
 /*******************************************************/
@@ -81,30 +79,40 @@ theTimer.reset();
 for (var i = 0; i < iterations; ++i) {
     aFunc(i);
 }
-theTimer.timeOver('Loop1');
 theTimer2.timeOver('Loop1');
 
 theTimer.reset();
+count = 0;
 for (var i = 0; i < iterations; ++i) {
-    count2 += calculations(i);
+    count += calculations(i);
 }
 theTimer.timeOver('Loop2');
 
 
 theTimer.reset();
+count = 0;
 for (var i = 0; i < iterations; ++i) {
     (function (c) {
-        count3 += parseInt(c);
-        count3 = Math.sqrt(count3);
+        count += parseInt(c);
+        count = Math.sqrt(count);
     })(i);
 }
 theTimer.timeOver('Loop3');
 
 
 theTimer.reset();
+count = 0;
 for (var i = 0; i < iterations; ++i) {
     (function (c) {
-        count4 += calculations(i);
+        count += calculations(i);
     })(i);
 }
 theTimer.timeOver('Loop4');
+
+theTimer.reset();
+count = 0;
+for (var i = 0; i < iterations; ++i) {
+        count += parseInt(i);
+        count = Math.sqrt(count);
+}
+theTimer.timeOver('Loop5');

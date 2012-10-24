@@ -5,4 +5,4 @@
  * async vs sync demo
  */
 require('tamejs').register ();
-require ('_aSyncTestDU.tjs');
+require ('./_aSyncTestDU.tjs');

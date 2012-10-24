@@ -6,6 +6,31 @@
  */
 var fs = require('fs');
 
+// module pattern
+// start is not accessible from outside
+var timer2 = (function () {
+
+    var _start = process.hrtime();
+
+    var reset = function () {
+        _start = process.hrtime();
+    };
+
+    var _getMilliDiff = function () {
+        var _diff = process.hrtime(_start);
+        return Math.round( _diff[1] / 1000000 );
+    };
+    var timeOver = function (text) {
+        console.log(text + ' / Time: x sec ' + _getMilliDiff() + 'ms');
+    };
+
+    return {
+        'reset' : reset,
+        'timeOver' : timeOver
+    };
+})();
+
+
 function duSync(path) {
     var total = 0;
     var stat = fs.statSync(path);
@@ -90,29 +115,20 @@ function duAsync(path, callback) {
     // callback(null, total); misplaced
 }
 
-var t0 = Date.now();
-duAsync('site', function initialCB(err, totalLen) { /*anon func should have a name for easier debugging */
+timer2.reset();
+duAsync('node_modules', function initialCB(err, totalLen) { /*anon func should have a name for easier debugging */
     if (err) {
         console.log(err);
         return;
     }
-    console.log('aSync Result is: %d Kb / Completed in ' + (Date.now() - t0) + 'ms', totalLen / 1024);
+    console.log('aSync Result is: %d Kb', Math.round(totalLen / 1024));
+    timer2.timeOver('aSync Timer');
 });
 
-t0 = Date.now();
-var duSyncResult = duSync('site');
-console.log('Sync Result is: %d Kb / Completed in ' + (Date.now() - t0) + 'ms', duSyncResult / 1024);
-
-
-// branching, just testing 8-)
-(function (nextFnc, myVal) {
-    console.log('a before next() / %s', myVal);
-    nextFnc();
-    // if or switch statement with branches that may mix sync and async calls.
-    // All code paths must end up calling next() or callback(null, result)
-})(function () {
-    console.log('b after next()');
-}, 'Hello World');
+timer2.reset();
+var duSyncResult = duSync('node_modules');
+console.log('Sync Result is: %d Kb', Math.round(duSyncResult / 1024));
+timer2.timeOver('_Sync Timer');
 
 /* RESULT IS on my MacBook Air 2011:
 
@@ -130,19 +146,3 @@ function error(err, line, cb) {
         return;
     }
 }
-
-
-function aSyncDu2(path, callback) {
-    var totals = 0;
-
-    callback(null, totals);
-}
-
-t0 = Date.now();
-aSyncDu2('site', function initCb(err, totalLen) {
-    if (err) {
-        console.log(err);
-        return;
-    }
-    console.log('aSyncDu2 Result is: %d Kb / Completed in ' + (Date.now() - t0) + 'ms', totalLen / 1024);
-});
