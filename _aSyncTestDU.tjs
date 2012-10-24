@@ -1,0 +1,39 @@
+/**
+ * @author Cyrill @SchumacherFM
+ * @date 9/12/12
+ * async vs sync demo
+ */
+var fs = require('fs');
+
+function error(err, line, cb) {
+    if (err) {
+        cb(err);
+        console.log(err, ': on line ' + line);
+        return;
+    }
+}
+
+
+function aSyncDu2(path, callback) {
+    var totals = 0;
+
+    var err, stats;
+    await
+    {
+        fs.stat(path, defer(err, stats));
+    }
+
+    console.log(err,stats);
+
+
+    callback(null, totals);
+}
+
+t0 = Date.now();
+aSyncDu2('site', function initCb(err, totalLen) {
+    if (err) {
+        console.log(err);
+        return;
+    }
+    console.log('aSyncDu2 Result is: %d Kb / Completed in ' + (Date.now() - t0) + 'ms', totalLen / 1024);
+});
