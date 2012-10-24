@@ -18,10 +18,10 @@ var timer2 = (function () {
 
     var _getMilliDiff = function () {
         var _diff = process.hrtime(_start);
-        return Math.round( _diff[1] / 1000000 );
+        return Math.round(_diff[1] / 1000000);
     };
     var timeOver = function (text) {
-        console.log(text + ' / Time: x sec ' + _getMilliDiff() + 'ms');
+        console.log(text + ' / Time: x sec ' + _getMilliDiff() + 'ms T2');
     };
 
     return {
@@ -80,7 +80,8 @@ function duAsync(path, callback) {
                         return;
                     }
 
-                    (function _asyncForEach(i, callbacker) {
+                    // Immediately-Invoked Function Expression (IIFE)
+                    (function _asyncForEachIIFE(i, callbacker) {
                         if (i < files.length) {
 
                             duAsync(path + "/" + files[i], function recursiveCB(err, len) {
@@ -91,7 +92,7 @@ function duAsync(path, callback) {
                                 if (len) {
                                     total += len;
                                 }
-                                _asyncForEach(i + 1, callbacker);
+                                _asyncForEachIIFE(i + 1, callbacker);
                             });
 
                         } else {
@@ -115,29 +116,28 @@ function duAsync(path, callback) {
     // callback(null, total); misplaced
 }
 
+
 timer2.reset();
 duAsync('node_modules', function initialCB(err, totalLen) { /*anon func should have a name for easier debugging */
     if (err) {
         console.log(err);
         return;
     }
-    console.log('aSync Result is: %d Kb', Math.round(totalLen / 1024));
-    timer2.timeOver('aSync Timer');
+    console.log('aSync IIFE Result is: %d Kb', Math.round(totalLen / 1024));
+    timer2.timeOver('aSync IFFE Timer');
 });
 
 timer2.reset();
 var duSyncResult = duSync('node_modules');
 console.log('Sync Result is: %d Kb', Math.round(duSyncResult / 1024));
-timer2.timeOver('_Sync Timer');
+timer2.timeOver('Sync Timer');
+
 
 /* RESULT IS on my MacBook Air 2011:
-
- $ ./du.js
- Sync Result is: 21551.8125 Kb / Completed in 49ms
- a before next()
- b after next()
- aSync Result is: 21551.8125 Kb / Completed in 128ms
-
+ Sync Result is: 10201 Kb
+ _Sync Timer / Time: x sec 58ms T2
+ aSync Result is: 10201 Kb
+ aSync Timer / Time: x sec 141ms T2 // IIFE
  */
 function error(err, line, cb) {
     if (err) {
