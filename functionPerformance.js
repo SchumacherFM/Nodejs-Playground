@@ -31,6 +31,30 @@ timer.prototype.timeOver = function (text) {
     console.log(text + ' / Time: ' + diff[0] + ' sec ' + Math.round(diff[1] / 1000000) + ' ms');
 };
 
+// module pattern
+// start is not accessible from outside
+var timer2 = (function () {
+
+    var _start = process.hrtime();
+
+    var reset = function () {
+        _start = process.hrtime();
+    };
+
+    var _getMilliDiff = function () {
+        var _diff = process.hrtime(_start);
+        return Math.round( _diff[1] / 1000000 );
+    };
+    var timeOver = function (text) {
+        console.log(text + ' / Time: x sec ' + _getMilliDiff() + 'ms T2');
+    };
+
+    return {
+        'reset' : reset,
+        'timeOver' : timeOver
+    };
+})();
+
 /*******************************************************/
 // using parseInt just for fun
 var calculations = function (calc) {
@@ -49,13 +73,16 @@ var aFunc = function (c) {
     iterations = 7000000;
 
 /*******************************************************/
-var theTimer = new timer();
+var theTimer = new timer(),
+    theTimer2 = timer2;
+
 
 theTimer.reset();
 for (var i = 0; i < iterations; ++i) {
     aFunc(i);
 }
 theTimer.timeOver('Loop1');
+theTimer2.timeOver('Loop1');
 
 theTimer.reset();
 for (var i = 0; i < iterations; ++i) {
