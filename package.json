@@ -23,5 +23,6 @@
     , "riak-js"          : "latest"
     , "mysql"           : "latest"
     , "tamejs"            : "latest"
+    , "async" : "latest"
   }
 }
